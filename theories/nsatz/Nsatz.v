@@ -34,6 +34,7 @@ Require Import ZArith.
 Require Import Lia.
 
 Require Export NsatzTactic.
+Require Export ENsatzTactic.
 (** Make use of [discrR] in [nsatz] *)
 Ltac nsatz_internal_discrR ::= discrR.
 
