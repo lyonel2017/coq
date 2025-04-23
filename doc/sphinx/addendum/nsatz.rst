@@ -73,6 +73,42 @@ files that declare the axioms used to define the real numbers, you can
    See the file `Nsatz.v <https://github.com/coq/coq/blob/master/test-suite/success/Nsatz.v>`_
    for examples, especially in geometry.
 
+   -.. tacn:: ensatz {? with radicalmax := @one_term strategy := @one_term }
+
+    This tactic is for solving goals of the form
+
+    :math:`\begin{array}{l}
+    \forall X_1, \ldots, X_n \in A, \\
+    P_1(X_1, \ldots, X_n) = Q_1(X_1, \ldots, X_n), \ldots, P_s(X_1, \ldots, X_n) = Q_s(X_1, \ldots, X_n) \\
+    \vdash \exists Y_1, \ldots, Y_m \in A, P(X_1, \ldots, X_n) = Q(X_1, \ldots, X_n, Y_1, \ldots, Y_m) \\
+    \end{array}`
+
+    where :math:`P, Q, P_1, Q_1, \ldots, P_s, Q_s, Q` are polynomials and :math:`A` is an integral
+    domain, i.e. a commutative ring with no zero divisors. For example, :math:`A`
+    can be :math:`\mathbb{R}`, :math:`\mathbb{Z}`, or :math:`\mathbb{Q}`.
+    Note that the equality :math:`=` used in these goals can be
+    any setoid equality (see :ref:`tactics-enabled-on-user-provided-relations`) , not only Leibniz equality.
+
+    It also proves formulas
+
+    :math:`\begin{array}{l}
+    \forall X_1, \ldots, X_n \in A, \\
+    P_1(X_1, \ldots, X_n) = Q_1(X_1, \ldots, X_n) \wedge \ldots \wedge P_s(X_1, \ldots, X_n) = Q_s(X_1, \ldots, X_n) \\
+    \rightarrow \exists Y_1, \ldots, Y_m \in A, P(X_1, \ldots, X_n) = Q(X_1, \ldots, X_n, Y_1, \ldots, Y_m) \\
+    \end{array}`
+
+    doing automatic introductions.
+
+    `strategy`
+      gives the order on variables :math:`X_1,\ldots,X_n` and the strategy
+      used in Buchberger algorithm (see :cite:`sugar` for details):
+
+        * `strategy := 0%Z`: reverse lexicographic order and newest s-polynomial.
+        * `strategy := 1%Z`: reverse lexicographic order and sugar strategy.
+        * `strategy := 2%Z`: pure lexicographic order and newest s-polynomial.
+        * `strategy := 3%Z`: pure lexicographic order and sugar strategy.
+
+
 More about `nsatz`
 ---------------------
 
